@@ -34,18 +34,18 @@ def hit_api():
 
         # compare against the threshold
         if current_carbon > threshold.value and previous_carbon < threshold.value:
-            print "Turn Off"
+            msg = "Turn Off"
             send_text("#off")
             # send text message to turn off
         elif current_carbon < threshold.value and previous_carbon > threshold.value:
-            print "Turn On"
+            msg = "Turn On"
             send_text("#on")
             # send text message to turn on
         elif current_carbon > threshold.value and previous_carbon > threshold.value:
-            print "Stay Off"
+            msg = "Stay Off"
 
         else:
-            print "Stay On"
+            msg = "Stay On"
 
 
         # update carbon in the database
@@ -61,14 +61,14 @@ def hit_api():
         print "The carbon has been updated in the database."
 
         if current_carbon > threshold.value:
-            print "Turn Off"
+            msg = "Turn Off"
             send_text("#off")
         else:
-            print "Turn On"
+            msg = "Turn On"
             send_text("#on")
 
 
-    return json.dumps(model.session.query(model.CarbonConsumption).one().to_dict())
+    return json.dumps(msg)
 
 def send_text(msg):
     wemo_phone = '+14152339406'
